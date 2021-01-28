@@ -59,6 +59,16 @@ html, body {
     width: 100%;
     height: 100%;
     padding-top: 60px;
+    background-color: white;
+    z-index: 3;
+    text-align: center;
+    overflow-y: scroll;
+}
+/* OPTIONS */
+#overlay select {
+    height: 50px;
+    width: 250px;
+    max-width: 250px;
 }
 /* BODY */
 .page {
