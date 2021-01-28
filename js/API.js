@@ -4,8 +4,7 @@ let unitType = "standard";
 //https://openweathermap.org/current#multi
 let language = "en"
 
-
-function CallByCityName(cityName) {
+/*function CallByCityName(cityName) {
     API_Call("http://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&units=" + unitType + "&appid=" + API_Key + "&lang=" + language);
 }
 
@@ -21,11 +20,27 @@ function API_Call(preparedURL) {
     $.ajax({
         url: preparedURL,
         type: "GET",
+        dataType: 'json',
         success: function (result) {
             console.log(result);
+            weatherObject = new Weather(result);
         },
         error: function (error) {
             console.log(error);
+            alert("brak");
         }
     })
+}*/
+
+
+const WeatherAPI = {
+    getByCityName: function(cityName){
+        return $.ajax({type:"GET", url: "http://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&units=" + unitType + "&appid=" + API_Key + "&lang=" + language});
+    },
+    getByCityID: function(cityID){
+        return $.ajax({type:"GET", url: "http://api.openweathermap.org/data/2.5/weather?id=" + cityID + "&units=" + unitType + "&appid=" + API_Key + "&lang=" + language});
+    },
+    getByCordinates: function(x, y){
+        return $.ajax({type:"GET", url: "http://api.openweathermap.org/data/2.5/weather?lat=" + x + "&lon=" + y + "&units=" + unitType + "&appid=" + API_Key + "&lang=" + language});
+    }
 }
