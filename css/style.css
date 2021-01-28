@@ -36,11 +36,13 @@ html, body {
     border-radius: 3px;
     flex-basis: 50%;
     margin-left: 20px;
+    max-width: 500px;
 }
 .topnav input {
     padding: 10px;
     border: none;
     width: 200px;
+    flex: 1;
 }
 .topnav .searchBtn {
     padding: 0 5px;
