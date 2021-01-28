@@ -56,14 +56,24 @@ html, body {
     position: fixed;
     width: 100%;
     height: 100%;
-    background-color: red;
     padding-top: 60px;
 }
-  
-  @media screen and (max-width: 600px) {
+/* BODY */
+.page {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    padding-top: 60px;
+}
+.flex {
+    display: flex;
+}
 
-  }
-  
-  @media screen and (max-width: 600px) {
+@media screen and (max-width: 600px) {
 
-  }
+}
+  
+@media screen and (max-width: 600px) {
+
+}
