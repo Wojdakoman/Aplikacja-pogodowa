@@ -108,6 +108,28 @@ html, body {
 .tempMax{
     color: #B1090C;
 }
+.noLocation {
+    margin: 0 auto;
+    width: 90%;
+    display: flex;
+    justify-content: center;
+}
+.noLocation a {
+    border: 1px solid #006C20;
+    border-radius: 3px;
+    display: flex;
+}
+.noLocation p {
+    background-color: #00BD20;
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+}
+.noLocation span {
+    color: #006C20;
+    padding: 10px 5px;
+}
 
 @media screen and (max-width: 600px) {
 
