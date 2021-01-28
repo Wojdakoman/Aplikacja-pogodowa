@@ -1,5 +1,7 @@
 *{
     box-sizing: border-box;
+    padding:0;
+    margin:0;
 }
 html, body {
     margin:0;
@@ -68,6 +70,43 @@ html, body {
 }
 .flex {
     display: flex;
+}
+.flex-center {
+    justify-content: center;
+}
+.flex-column {
+    flex-direction: column;
+}
+.flex-stretch {
+    align-items: stretch;
+}
+.flex-space-around {
+    justify-content: space-around;
+}
+.currentLocation {
+    width: 90%;
+    margin: auto;
+}
+.weatherImg {
+    max-width: 100px;
+    max-height: 100px;
+}
+.cityName {
+    font-size: 20px;
+    align-self: center;
+}
+.cityInfo h1 {
+    margin: 5px 0;
+}
+.cityDetail p {margin-top: 2px;}
+.middle {
+    align-items: center;
+}
+.tempMin {
+    color:#0295D0;
+}
+.tempMax{
+    color: #B1090C;
 }
 
 @media screen and (max-width: 600px) {
