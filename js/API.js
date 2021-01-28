@@ -1,6 +1,6 @@
-const API_Key = "0df42057e9f97bdaf7c5ffdedb2db1ab";
+const API_Key = "3aa09f21d6c61c817b25075fbaf29495";
 //https://openweathermap.org/current#data
-let unitType = "standard";
+let unitType = "metric";
 //https://openweathermap.org/current#multi
 let language = "en"
 
@@ -35,7 +35,7 @@ function API_Call(preparedURL) {
 
 const WeatherAPI = {
     getByCityName: function(cityName){
-        return $.ajax({type:"GET", url: "http://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&units=" + unitType + "&appid=" + API_Key + "&lang=" + language});
+        return $.ajax({type:"GET", url: "http://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&units=" + unitType + "&appid=" + API_Key + "&lang=" + language, dataType: 'json',});
     },
     getByCityID: function(cityID){
         return $.ajax({type:"GET", url: "http://api.openweathermap.org/data/2.5/weather?id=" + cityID + "&units=" + unitType + "&appid=" + API_Key + "&lang=" + language});
