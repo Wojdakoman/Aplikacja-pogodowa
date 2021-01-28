@@ -8,6 +8,25 @@ $(document).on('click','#navicon',function(event){
 //nav
 $(".page").first().toggle();
 
+$(".select a").on("click", function(){
+    $(".select ul").toggle();
+});
+
+let avLanguages = [["polski","pl"], ["angielski","en"], ["albański", "al"], ["arabski", "ar"], ["azerbejdżański", "az"], ["bułgarski","bg"], ["kataloński","ca"],
+["czeski","cz"], ["duński","da"], ["niemiecki","de"], ["grecki","el"],  ["fiński","fn"], ["francuski","fr"], ["hindi","hi"], ["chorwacki","hr"], ["węgierski","hu"], 
+["włoski","it"], ["japoński","ja"], ["koreański","kr"], ["łotewski","la"], ["litewski","lt"], ["macedoński","mk"], ["norweski","no"], ["holenderski","nl"],
+["indonezyjski","id"], ["portugalski","pt"], ["rosyjski","ru"], ["szwedzki","sv"], ["słowacki","sk"], ["słoweński","sl"], ["hiszpański","es"], ["serbski","sr"],
+["turecki","tr"], ["ukraiński","ua"], ["chiński uproszczony","zh_cn"]];
+
+let ul = $("#languagesContainer");
+for(let i = 0;i<avLanguages.length;i++){
+    ul.append(new Option(avLanguages[i][0], avLanguages[i][1]));
+}
+
+$("#languagesContainer").on("change", function(){
+    language = $("#languagesContainer").val();
+});
+
 
 //Funcja do onClick
 function getCurrentLocation(){
