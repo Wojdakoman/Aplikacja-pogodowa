@@ -1,4 +1,5 @@
 let weatherObject;
+let forecastObject;
 const imageSource = "http://openweathermap.org/img/wn/{name}.png"
 let currentItem;
 /* MENU */
@@ -43,6 +44,7 @@ function getCurrentLocation() {
             function (response) {
                 weatherObject = new Weather(response);
                 CompleteWeather();
+                WeatherForecast(weatherObject.cordX, weatherObject.cordY);
             }
         )
     }
@@ -79,6 +81,7 @@ function CheckCityName() {
             .then(response => {
                 weatherObject = new Weather(response);
                 CompleteWeather();
+                WeatherForecast(weatherObject.cordX, weatherObject.cordY);
             })
             .fail(err => alert("eroro"))
     }
@@ -192,6 +195,7 @@ function AutoComplete() {
             textContainer.addEventListener("click", function(event){
                 inputElement.value = this.value;
                 ClearAutoCompleteList();
+                CheckCityName();
             });
 
             divContainer.appendChild(textContainer);
@@ -249,4 +253,33 @@ function ChooseItem(){
     }
     CheckCityName();
     ClearAutoCompleteList();
+}
+
+function WeatherForecast(x, y){
+    ForecastAPI.getSevenDaysForecast(x, y)
+    .then(response =>{
+        forecastObject = Forecast(response);
+    })
+    .fail(err => alert("blad"))
+}
+
+function Forecast(forecast){
+    let daysObject = [];
+    for(let i = 0; i < 8; i++){
+        daysObject.push(new Day(forecast.daily[i]));
+    }
+}
+
+function Day(day){
+    this.dt = day.dt;
+    this.dayTemp = day.temp.day;
+    this.tempMin = day.temp.min;
+    this.tempMax = day.temp.max;
+    this.feelLike = day.feels_like.day;
+    this.pressure = day.pressure;
+    this.humidity = day.humidity;
+    this.windSpeed = day.windSpeed;
+    this.degrees = day.wind_deg;
+    this.icon = day.weather[0].icon;
+    this.description = day.weather[0].description;
 }
