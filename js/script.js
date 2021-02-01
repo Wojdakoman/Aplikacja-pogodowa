@@ -1,59 +1,60 @@
 let weatherObject;
 const imageSource = "http://openweathermap.org/img/wn/{name}.png"
+let currentItem;
 /* MENU */
-$(document).on('click','#navicon',function(event){
+$(document).on('click', '#navicon', function (event) {
     event.preventDefault();
     $("#overlay").toggle();
 });
 //nav
 $(".page").first().toggle();
 
-$(".select a").on("click", function(){
+$(".select a").on("click", function () {
     $(".select ul").toggle();
 });
 
-let avLanguages = [["polski","pl"], ["angielski","en"], ["albański", "al"], ["arabski", "ar"], ["azerbejdżański", "az"], ["bułgarski","bg"], ["kataloński","ca"],
-["czeski","cz"], ["duński","da"], ["niemiecki","de"], ["grecki","el"],  ["fiński","fn"], ["francuski","fr"], ["hindi","hi"], ["chorwacki","hr"], ["węgierski","hu"], 
-["włoski","it"], ["japoński","ja"], ["koreański","kr"], ["łotewski","la"], ["litewski","lt"], ["macedoński","mk"], ["norweski","no"], ["holenderski","nl"],
-["indonezyjski","id"], ["portugalski","pt"], ["rosyjski","ru"], ["szwedzki","sv"], ["słowacki","sk"], ["słoweński","sl"], ["hiszpański","es"], ["serbski","sr"],
-["turecki","tr"], ["ukraiński","ua"], ["chiński uproszczony","zh_cn"]];
+let avLanguages = [["polski", "pl"], ["angielski", "en"], ["albański", "al"], ["arabski", "ar"], ["azerbejdżański", "az"], ["bułgarski", "bg"], ["kataloński", "ca"],
+["czeski", "cz"], ["duński", "da"], ["niemiecki", "de"], ["grecki", "el"], ["fiński", "fn"], ["francuski", "fr"], ["hindi", "hi"], ["chorwacki", "hr"], ["węgierski", "hu"],
+["włoski", "it"], ["japoński", "ja"], ["koreański", "kr"], ["łotewski", "la"], ["litewski", "lt"], ["macedoński", "mk"], ["norweski", "no"], ["holenderski", "nl"],
+["indonezyjski", "id"], ["portugalski", "pt"], ["rosyjski", "ru"], ["szwedzki", "sv"], ["słowacki", "sk"], ["słoweński", "sl"], ["hiszpański", "es"], ["serbski", "sr"],
+["turecki", "tr"], ["ukraiński", "ua"], ["chiński uproszczony", "zh_cn"]];
 
 let ul = $("#languagesContainer");
-for(let i = 0;i<avLanguages.length;i++){
+for (let i = 0; i < avLanguages.length; i++) {
     ul.append(new Option(avLanguages[i][0], avLanguages[i][1]));
 }
 
-$("#languagesContainer").on("change", function(){
+$("#languagesContainer").on("change", function () {
     language = $("#languagesContainer").val();
 });
 
 
 //Funcja do onClick
-function getCurrentLocation(){
+function getCurrentLocation() {
 
     const successfulLookup = position => {
         const { latitude, longitude } = position.coords;
         fetch(`https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=5af07f4f6a8b4918a010d981b6175f78`)
-          .then(response => response.json())
-          .then(console.log)
+            .then(response => response.json())
+            .then(console.log)
 
-          //CallByCordinates(latitude, longitude)
-          WeatherAPI.getByCordinates(latitude, longitude).then(
-            function(response){
+        //CallByCordinates(latitude, longitude)
+        WeatherAPI.getByCordinates(latitude, longitude).then(
+            function (response) {
                 weatherObject = new Weather(response);
                 CompleteWeather();
             }
-          )
+        )
     }
-          
-    if(window.navigator.geolocation){
+
+    if (window.navigator.geolocation) {
         window.navigator.geolocation
-      .getCurrentPosition(successfulLookup, console.log);
+            .getCurrentPosition(successfulLookup, console.log);
     }
 
 }
 
-if(window.navigator.geolocation){
+if (window.navigator.geolocation) {
 
     getCurrentLocation()
 
@@ -62,25 +63,24 @@ if(window.navigator.geolocation){
 window.onload = function () {
     const searchBar = document.querySelector('.searchBar');
     const searchBarChildrens = searchBar.children;
-    searchBarChildrens[0].addEventListener('keydown', function (event) {
-        if (event.key === "Enter") {
-            CheckCityName();
-        }
-    });
+    searchBarChildrens[0].addEventListener('keydown', CheckKeyInput, false);
     searchBarChildrens[1].addEventListener('click', function (event) {
         CheckCityName();
-    });
+    }, false);
+    searchBarChildrens[0].addEventListener('input', AutoComplete, false);
+    searchBarChildrens[0].addEventListener('focusin', AutoComplete, false);
+    document.addEventListener('click', CloseList, false);
 }
 
 function CheckCityName() {
     var inputText = document.querySelector('.searchBar').children[0].value;
     if (inputText.length > 0) {
         WeatherAPI.getByCityName(inputText)
-        .then(response => {
-            weatherObject = new Weather(response); 
-            CompleteWeather();
-        })
-        .fail(err => alert("eroro"))
+            .then(response => {
+                weatherObject = new Weather(response);
+                CompleteWeather();
+            })
+            .fail(err => alert("eroro"))
     }
 }
 
@@ -110,10 +110,10 @@ function Weather(text) {
     this.gust = text.wind.gust;
 
     //Rain
-    if(text.rain)
+    if (text.rain)
         this.rain = text.rain["1h"];
     //Snow
-    if(text.snow)
+    if (text.snow)
         this.snow = text.snow["1h"];
 
     //Sys
@@ -122,17 +122,17 @@ function Weather(text) {
     this.sunset = text.sys.sunset;
 }
 
-function CompleteWeather(){
+function CompleteWeather() {
     const unit = ((value) => {
-        switch(value) {
+        switch (value) {
             case "standard": return "K";
             case "metric": return "°C";
             case "imperial": return "F";
-          default: return "OK";
+            default: return "OK";
         }
     })(unitType);
 
-    document.querySelector('.cityName').innerHTML = weatherObject.name+', '+weatherObject.country;
+    document.querySelector('.cityName').innerHTML = weatherObject.name + ', ' + weatherObject.country;
     document.querySelector('.weatherImg').src = imageSource.replace("{name}", weatherObject.weatherIcon);
     document.querySelector('.cityInfo.flex.middle').children[1].innerHTML = weatherObject.temp + unit;
     document.querySelector('.tempMin').innerHTML = weatherObject.tempMin + unit;
@@ -143,24 +143,110 @@ function CompleteWeather(){
     //elements[1].children[0]
     //Tekst pogodowy
     //elements[1].children[1].innerHTML = 
-    if(weatherObject.rain){
+    if (weatherObject.rain) {
         elements[0].style.display = "";
-        elements[0].children[1].innerHTML = weatherObject.rain +" mm/h";
+        elements[0].children[1].innerHTML = weatherObject.rain + " mm/h";
     }
 
-    if(weatherObject.snow){
+    if (weatherObject.snow) {
         elements[1].style.display = "";
-        elements[1].children[1].innerHTML = weatherObject.snow +" mm/h";
+        elements[1].children[1].innerHTML = weatherObject.snow + " mm/h";
     }
 
     const compass = ((value) => {
-        val=Math.round((value/22.5)+.5, 1);
-        arr=["N","NNE","NE","ENE","E","ESE", "SE", "SSE","S","SSW","SW","WSW","W","WNW","NW","NNW"];
+        val = Math.round((value / 22.5) + .5, 1);
+        arr = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
         return arr[(val % 16)]
     })(weatherObject.degrees);
 
-    elements[2].children[1].innerHTML = weatherObject.speed + " m/s "+ compass;
-    elements[3].innerHTML = "Odczuwalne: "+ weatherObject.feelsLike + unit;
-    elements[4].innerHTML = "Wilgotność: "+ weatherObject.humidity +"%";
-    elements[5].innerHTML = "Ciśnienie: "+ weatherObject.pressure +"hPa"
+    elements[2].children[1].innerHTML = weatherObject.speed + " m/s " + compass;
+    elements[3].innerHTML = "Odczuwalne: " + weatherObject.feelsLike + unit;
+    elements[4].innerHTML = "Wilgotność: " + weatherObject.humidity + "%";
+    elements[5].innerHTML = "Ciśnienie: " + weatherObject.pressure + "hPa"
+}
+
+//let cityArray = ["Katowice", "Gliwice", "Bytom", "Radom", "Radomsko"];
+$.get('./files/miasta.csv', function(data){
+    cityArray = data.split(',');
+});
+
+function AutoComplete() {
+    ClearAutoCompleteList();
+
+    let inputText = this.value.toLowerCase();
+    let inputElement = this;
+    if(!inputText) return;
+    currentItem = -1;
+    //let parentContainer = document.getElementById("nav");
+    let parentContainer = document.getElementsByClassName("searchBar")[0];
+    let divContainer = document.createElement("div");
+    divContainer.classList.add("autoCompleteList");
+
+    for(let i = 0; i < cityArray.length; i++){
+        if(cityArray[i].toLowerCase().substr(0, inputText.length) === inputText){
+            let text = cityArray[i];
+            let textContainer = document.createElement("div");
+            textContainer.classList.add("autoCompleteItem");
+            textContainer.innerHTML = "<b>" + text.substr(0, inputText.length) + "</b>" + text.substr(inputText.length);
+            textContainer.value = cityArray[i];
+            textContainer.addEventListener("click", function(event){
+                inputElement.value = this.value;
+                ClearAutoCompleteList();
+            });
+
+            divContainer.appendChild(textContainer);
+        }
+    }
+    parentContainer.appendChild(divContainer);
+}
+
+function ClearAutoCompleteList(){
+    let listContainer = document.getElementsByClassName("autoCompleteList")[0];
+    if(listContainer)
+        listContainer.remove();
+}
+
+function CloseList(event){
+    let listContainer = document.getElementsByClassName("autoCompleteList")[0];
+    let inputElement = document.getElementsByClassName("searchBar")[0].children[0];
+    if(event.target != inputElement && listContainer){
+        listContainer.remove();
+    }
+}
+
+function CheckKeyInput(event){
+    switch(event.key){
+        case "ArrowUp":  currentItem--; SetItemActive() ;break;
+        case "ArrowDown": currentItem++; SetItemActive() ; break;
+        case "Enter": ChooseItem(); break;
+    }
+}
+
+function SetItemActive(){
+    if(!document.getElementsByClassName("autoCompleteList")[0]) return;
+
+    let children = document.getElementsByClassName("autoCompleteList")[0].children;
+    ClearItemActive()
+
+    let parentCount = children.length;
+    if(currentItem >= parentCount) currentItem = 0;
+    if(currentItem < 0) currentItem = parentCount - 1;
+    if(children)
+        children[currentItem].classList.add("autoCompleteItemSelected");
+}
+
+function ClearItemActive(){
+    let children = document.getElementsByClassName("autoCompleteList")[0].children;
+    for(let i = 0; i < children.length; i++){
+        children[i].classList.remove("autoCompleteItemSelected");
+    }
+}
+
+function ChooseItem(){
+    if(document.getElementsByClassName("autoCompleteList")[0] && currentItem != -1){
+        let children = document.getElementsByClassName("autoCompleteList")[0].children;
+        document.querySelector('.searchBar').children[0].value = children[currentItem].value;
+    }
+    CheckCityName();
+    ClearAutoCompleteList();
 }
