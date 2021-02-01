@@ -1,20 +1,43 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pl">
-    <head>
+<head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" crossorigin="anonymous">
 	<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400;1,700&display=swap" rel="stylesheet"> 
+	<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400;1,700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="css/style.css">
 
 	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 	<script type="text/javascript" src="js/API.js" defer></script>
 	<script type="text/javascript" src="js/script.js" defer></script>
 
+	<!-- CSSMap STYLESHEET - POLAND -->
+	<link rel="stylesheet" type="text/css" href="cssmap-poland/cssmap-poland.css" media="screen" />
+	<!-- jQuery -->
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	<!-- CSSMap SCRIPT -->
+	<script type="text/javascript" src="https://cssmapsplugin.com/5/jquery.cssmap.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+
+			// CSSMap;
+			$("#map-poland").CSSMap({
+				"size": 540,
+				"cities": true,
+				"tooltips": "floating-top-center",
+				"responsive": "auto",
+				"fitHeight": true,
+				"tapOnce": true
+			});
+			// END OF THE CSSMap;
+
+		});
+	</script>
+
 	<title>Aplikacja pogodowa</title>
-	</head>
+</head>
 
     <body>
         <nav class="topnav" id="nav">
@@ -46,7 +69,7 @@
 					<div class="flex flex-space-around middle" style="margin-top: 5px;">
 						<div class="flex flex-column">
 							<div class="cityInfo flex middle">
-								<img  class="weatherImg" src="http://openweathermap.org/img/wn/10d@2x.png" />
+								<img class="weatherImg" src="http://openweathermap.org/img/wn/10d@2x.png" />
 								<h1>21&#176;C</h1>
 							</div>
 							<div class="flex flex-space-around">
@@ -63,7 +86,33 @@
 						</div>
 					</div>
 				</div>
-				<!-- tu mapa -->
+				<!-- MAP -->
+				<div id="display-map" class="display-demo-map">
+					<!-- CSSMap - Poland -->
+					<div id="map-poland">
+						<ul class="poland">
+							<li class="pl1"><a href="#dolnoslaskie">Dolnośląskie</a></li>
+							<li class="pl2"><a href="#kujawsko-pomorskie">Kujawsko-pomorskie</a></li>
+							<li class="pl3"><a href="#lubelskie">Lubelskie</a></li>
+							<li class="pl4"><a href="#lubuskie">Lubuskie</a></li>
+							<li class="pl5"><a href="#lodzkie">Łódzkie</a></li>
+							<li class="pl6"><a href="#malopolskie">Małopolskie</a></li>
+							<li class="pl7"><a href="#mazowieckie">Mazowieckie</a></li>
+							<li class="pl8"><a href="#opolskie">Opolskie</a></li>
+							<li class="pl9"><a href="#podkarpackie">Podkarpackie</a></li>
+							<li class="pl10"><a href="#podlaskie">Podlaskie</a></li>
+							<li class="pl11"><a href="#pomorskie">Pomorskie</a></li>
+							<li class="pl12"><a href="#slaskie">Śląskie</a></li>
+							<li class="pl13"><a href="#swietokrzyskie">Świętokrzyskie</a></li>
+							<li class="pl14"><a href="#warminsko-mazurskie">Warmińsko-mazurskie</a></li>
+							<li class="pl15"><a href="#wielkopolskie">Wielkopolskie</a></li>
+							<li class="pl16"><a href="#zachodniopomorskie">Zachodniopomorskie</a></li>
+						</ul>
+					</div>
+					<!-- END OF THE CSSMap - Poland -->
+				</div>
+				>
+				<!-- END OF THE MAP -->
 			</div>
 		</div>
 		<div class="page">
