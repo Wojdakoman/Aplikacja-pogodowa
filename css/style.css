@@ -348,6 +348,18 @@ button:hover {
     text-align: center;
 }
 
+.swiper-container{
+    width: 100%;
+    max-width: 650px;
+    height:  20vh;
+    position: absolute;
+    margin-left: -150px;
+}
+
+:root {
+    --swiper-theme-color: #242424 !important;
+}
+
 @media screen and (max-width: 750px) {
     #controls{
         display: none;
