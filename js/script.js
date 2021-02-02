@@ -2,7 +2,7 @@ let weatherObject;
 let forecastObject;
 const imageSource = "http://openweathermap.org/img/wn/{name}.png"
 let currentItem;
-
+let defaultCords = ["50.292961", "18.668930"];
 //Funcja do onClick
 function getCurrentLocation() {
 
@@ -18,6 +18,7 @@ function getCurrentLocation() {
                 weatherObject = new Weather(response);
                 CompleteWeather();
                 WeatherForecast(weatherObject.cordX, weatherObject.cordY);
+                AddMarker(weatherObject.cordY, weatherObject.cordX);
             }
         )
     }
@@ -55,6 +56,7 @@ function CheckCityName() {
                 weatherObject = new Weather(response);
                 CompleteWeather();
                 WeatherForecast(weatherObject.cordX, weatherObject.cordY);
+                ChangeLocation(weatherObject.cordY, weatherObject.cordX);
             })
             .fail(err => alert("eroro"))
     }
@@ -93,7 +95,7 @@ function Weather(text) {
         this.snow = text.snow["1h"];
 
     //Sys
-    this.country = text.sys.country;
+    this.country = text.sys.country ? text.sys.country: "";
     this.sunrise = text.sys.sunrise;
     this.sunset = text.sys.sunset;
 }
@@ -108,7 +110,8 @@ function CompleteWeather() {
         }
     })(unitType);
 
-    document.querySelector('.cityName').innerHTML = weatherObject.name + ', ' + weatherObject.country;
+    var nameText = (weatherObject.name + ', ' + weatherObject.country).trim();
+    document.querySelector('.cityName').innerHTML = nameText.length == 1? " " : nameText;
     document.querySelector('.weatherImg').src = imageSource.replace("{name}", weatherObject.weatherIcon);
     document.querySelector('.cityInfo.flex.middle').children[1].innerHTML = weatherObject.temp + unit;
     document.querySelector('.tempMin').innerHTML = weatherObject.tempMin + unit;
@@ -255,4 +258,15 @@ function Day(day){
     this.degrees = day.wind_deg;
     this.icon = day.weather[0].icon;
     this.description = day.weather[0].description;
+}
+
+function GetCityByCords(latitude, longitude){
+    WeatherAPI.getByCordinates(latitude, longitude).then(
+        function (response) {
+            weatherObject = new Weather(response);
+            defaultCords = [weatherObject.cordX, weatherObject.cordY];
+            CompleteWeather();
+            WeatherForecast(weatherObject.cordX, weatherObject.cordY);
+        }
+    )
 }

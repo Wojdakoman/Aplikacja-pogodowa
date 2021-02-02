@@ -12,30 +12,7 @@
 	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 	<script type="text/javascript" src="js/API.js" defer></script>
 	<script type="text/javascript" src="js/script.js" defer></script>
-
-	<!-- CSSMap STYLESHEET - POLAND -->
-	<link rel="stylesheet" type="text/css" href="cssmap-poland/cssmap-poland.css" media="screen" />
-	<!-- jQuery -->
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-	<!-- CSSMap SCRIPT -->
-	<script type="text/javascript" src="https://cssmapsplugin.com/5/jquery.cssmap.min.js"></script>
-	<script type="text/javascript">
-		$(document).ready(function () {
-
-			// CSSMap;
-			$("#map-poland").CSSMap({
-				"size": 540,
-				"cities": true,
-				"tooltips": "floating-top-center",
-				"responsive": "auto",
-				"fitHeight": true,
-				"tapOnce": true
-			});
-			// END OF THE CSSMap;
-
-		});
-	</script>
-
+	
 	<title>Aplikacja pogodowa</title>
 </head>
 
@@ -163,6 +140,7 @@
 				<label for="slide4"></label>
 			</div>
 			</div>
-
+		</div>
+		<div id="googleMap"></div>
     </body>
 </html>
