@@ -63,7 +63,7 @@ function CheckCityName() {
                 WeatherForecast(weatherObject.cordX, weatherObject.cordY);
                 ChangeLocation(weatherObject.cordY, weatherObject.cordX);
             })
-            .fail(err => console.log)
+            .fail(err => document.getElementsByClassName("searchBar")[0].children[0].value = "")
     }
 }
 
@@ -119,6 +119,7 @@ function CompleteWeather() {
     document.getElementsByClassName("noLocation")[0].style.display = "none";
 
     var nameText = (weatherObject.name + ', ' + weatherObject.country).trim();
+    if(nameText[nameText.length - 1] == ",") nameText = nameText.replace(",", "");
     document.querySelector('.cityName').innerHTML = nameText.length == 1? " " : nameText;
     document.querySelector('.weatherImg').src = imageSource.replace("{name}", weatherObject.weatherIcon);
     document.querySelector('.cityInfo.flex.middle').children[1].innerHTML = weatherObject.temp + unit;
