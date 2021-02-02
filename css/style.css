@@ -298,12 +298,12 @@ button:hover {
     border: 2px solid #fff;
     border-radius: 3px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
     cursor: pointer;
     float: left;
     margin-bottom: 22px;
     text-align: center;
     color: #191919;
-    font-family: Roboto, Arial, sans-serif;
     font-size: 1rem;
     line-height: 25px;
     padding-left: 5px;
