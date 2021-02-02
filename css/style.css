@@ -91,11 +91,11 @@ button:hover {
 }
 
 .autoCompleteItem:hover{
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.3);
 }
 
 .autoCompleteItemSelected{
-    background-color: white;
+    background-color: #0c0c0c;
 }
 
 ::-webkit-scrollbar{
@@ -242,10 +242,11 @@ button:hover {
 .titleForecast{
     font-weight: 300;
     text-transform: uppercase;
+    font-family: "Lucida Console", monospace;
     font-size: 1.1rem;
     text-align: center;
     color: white;
-    opacity: 0.85;
+    opacity: 0.9;
 }
 
 .swiper-container{
