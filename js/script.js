@@ -318,7 +318,7 @@ function CompleteForecast() {
     let forecastTemp = document.getElementsByClassName("cityInfo flex middle");
     let forecastTempMinMax = document.getElementsByClassName("temperatureObject");
     let forecastDetails = document.getElementsByClassName("cityDetail flex flex-column");
-    for(let i = 1; i < 5; i++){
+    for(let i = 1; i < 8; i++){
         forecastDays[i].innerHTML = daysObject[i].dt;
         forecastImg[i].src = imageSource.replace("{name}", daysObject[i].icon);
         forecastTemp[i].children[1].innerHTML = daysObject[i].dayTemp + unit;
