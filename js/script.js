@@ -3,7 +3,7 @@ let daysObject;
 const imageSource = "http://openweathermap.org/img/wn/{name}.png"
 let currentItem;
 let defaultCords = ["50.292961", "18.668930"];
-//Funcja do onClick
+
 function getCurrentLocation() {
     const successfulLookup = position => {
         const { latitude, longitude } = position.coords;
@@ -43,6 +43,14 @@ window.onload = function () {
     searchBarChildrens[0].addEventListener('focusin', AutoComplete, false);
     document.addEventListener('click', CloseList, false);
     document.getElementsByClassName("noLocation")[0].addEventListener('click', GetLocation, false);
+    WeatherAPI.getByCordinates(defaultCords[0], defaultCords[1]).then(
+        function (response) {
+            weatherObject = new Weather(response);
+            CompleteWeather();
+            WeatherForecast(weatherObject.cordX, weatherObject.cordY);
+            AddMarker(weatherObject.cordY, weatherObject.cordX);
+        }
+    )
 }
 
 function CheckCityName() {
@@ -55,7 +63,7 @@ function CheckCityName() {
                 WeatherForecast(weatherObject.cordX, weatherObject.cordY);
                 ChangeLocation(weatherObject.cordY, weatherObject.cordX);
             })
-            .fail(err => alert("eroro"))
+            .fail(err => console.log)
     }
 }
 
@@ -290,8 +298,10 @@ function GetCityByCords(latitude, longitude){
 }
 
 function ChangeVisibility() {
-    document.getElementsByClassName("noLocation")[0].style.display = "block";
+    /*document.getElementsByClassName("noLocation")[0].style.display = "block";
     document.getElementsByClassName("currentLocation flex flex-column")[0].style.display = "none";
+    document.getElementsByClassName("swiper-container")[0].style.display = "none";
+    document.getElementsByClassName("swiper-pagination")[0].style.display = "none";*/
 }
 
 function GetLocation() {

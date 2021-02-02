@@ -123,6 +123,8 @@ function AddMarker(x, y){
     map.panTo(pos);
     markerObject = marker;
     control.ChangeCenter(pos);
+    document.getElementsByClassName("currentLocation flex flex-column")[0].style.display = "";
+    document.getElementsByClassName("swiper-pagination")[0].style.display = "";
 }
 
 function DeleteMarks(){
