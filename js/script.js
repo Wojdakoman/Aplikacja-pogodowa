@@ -244,7 +244,7 @@ function WeatherForecast(x, y){
         forecastObject = Forecast(response);
         CompleteForecast();
     })
-    .fail(err => document.getElementById("slider").style.display = "none")
+    .fail(err => document.getElementsByClassName("swiper-container swiper-container-cube swiper-container-3d swiper-container-initialized swiper-container-horizontal")[0].style.display = "none")
 }
 
 function Forecast(forecast){
@@ -301,8 +301,8 @@ function GetLocation() {
 }
 
 function CompleteForecast() {
-    if(document.getElementById("slider").style.display == "none"){
-        document.getElementById("slider").style.display = "";
+    if(document.getElementsByClassName("swiper-container swiper-container-cube swiper-container-3d swiper-container-initialized swiper-container-horizontal")[0].style.display == "none"){
+        document.getElementsByClassName("swiper-container swiper-container-cube swiper-container-3d swiper-container-initialized swiper-container-horizontal")[0].style.display = "";
     }
     const unit = ((value) => {
         switch (value) {
