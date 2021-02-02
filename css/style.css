@@ -11,11 +11,11 @@ body {
     margin: 0;
     height: 100vh;
     font-family: 'Open Sans', sans-serif;
-    background: linear-gradient(-45deg, #43cea2  , #2c3e50);
+    background: linear-gradient(-45deg, #43cea2  , #33485c);
     background-repeat: no-repeat;
 }
 .card1 {
-    background: #333333;
+    background: #2b2a2a;
     color: white;
     padding: 1em;
     border-radius: 30px;
@@ -79,14 +79,14 @@ button:hover {
     right: 0;
     display: flex;
     flex-direction: column;
-    background-color: #333333;;
+    background-color: #2b2a2a;;
     border-radius: 0px 0px 30px 30px
 }
 
 .autoCompleteItem{
     padding: 8px;
     cursor: pointer;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgb(212, 212, 212, 0.3);
     color: white !important;
 }
 
@@ -102,11 +102,10 @@ button:hover {
     width: 25px;
 }
 ::-webkit-scrollbar-track{
-    border:7px solid #333333;
+    border:7px solid #2b2a2a;
 }
 ::-webkit-scrollbar-thumb{
     background: lightgrey;
-    opacity: 0.8;
     border-radius: 3px;
 }
 
@@ -245,6 +244,8 @@ button:hover {
     text-transform: uppercase;
     font-size: 1.1rem;
     text-align: center;
+    color: white;
+    opacity: 0.85;
 }
 
 .swiper-container{
