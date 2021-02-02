@@ -7,9 +7,9 @@ let defaultCords = ["50.292961", "18.668930"];
 function getCurrentLocation() {
     const successfulLookup = position => {
         const { latitude, longitude } = position.coords;
-        fetch(`https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=5af07f4f6a8b4918a010d981b6175f78`)
+        /*fetch(`https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=5af07f4f6a8b4918a010d981b6175f78`)
             .then(response => response.json())
-            .then(console.log)
+            .then(console.log)*/
 
         //CallByCordinates(latitude, longitude)
         WeatherAPI.getByCordinates(latitude, longitude).then(
