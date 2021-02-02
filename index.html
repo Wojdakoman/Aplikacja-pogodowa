@@ -67,7 +67,7 @@
 				</div>
 			</div>
 		</div>
-		<h3 class="titleForecast">Prognoza pogody</h3>		
+		<h3 class="titleForecast">Prognoza pogody:</h3>		
 	
 		<div class="swiper-container">
 			<div class="swiper-wrapper">
@@ -186,23 +186,26 @@
 
 			  </div>
 			  </div>
-			</div>
-			<div class="swiper-pagination"></div>
-		  <script>
-			var swiper = new Swiper('.swiper-container', {
-				effect: 'cube',
-      			grabCursor: true,
-				cubeEffect: {
-					shadow: false,
-					slideShadows: false,
-					shadowOffset: 0,
-					shadowScale: 0
-				},
-			  pagination: {
-				el: '.swiper-pagination',
-			  },
-			});
-		  </script>
+		</div>
+		<div class="swiper-pagination"></div>
+		
+		<script>
+		var swiper = new Swiper('.swiper-container', {
+			effect: 'cube',
+			grabCursor: true,
+			cubeEffect: {
+				shadow: false,
+				slideShadows: false,
+				shadowOffset: 0,
+				shadowScale: 0
+			},
+			pagination: {
+			el: '.swiper-pagination',
+			clickable: true
+			},
+		});
+		</script>
+
 		<div id="googleMap"></div>
     </body>
 </html>

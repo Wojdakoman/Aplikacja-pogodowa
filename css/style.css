@@ -293,7 +293,7 @@ button:hover {
     width: 60%;
     height: 30vh;
     border-radius: 30px;
-    margin-top: 30px;
+    margin-top: 20px;
     margin-bottom: 10px;
  }
 
@@ -346,14 +346,25 @@ button:hover {
     text-transform: uppercase;
     font-size: 1.3rem;
     text-align: center;
+    margin-top: 10px;
 }
 
 .swiper-container{
     width: 100%;
     max-width: 650px;
-    height:  20vh;
     position: absolute;
     margin-left: -150px;
+}
+
+.swiper-pagination{
+    margin-top: -5px !important;
+    position: relative !important;
+}
+
+.swiper-pagination-bullet{
+    width: 10px !important;
+    height: 10px !important;
+    margin: 0 2px !important;
 }
 
 :root {
