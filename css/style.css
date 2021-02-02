@@ -116,7 +116,7 @@ button:hover {
     width: 100%;
     max-width: 600px;
     margin: 1em;
-  }
+}
 .page {
     width: 100%;
     height: 100%;
@@ -186,6 +186,7 @@ button:hover {
 
 /* Weather Forecast */
 #slider {
+    margin: 0 auto;
     width: 100%;
     max-width: 650px;
     text-align: center;
@@ -200,6 +201,7 @@ button:hover {
  #slides {
     padding: 10px;
     z-index: 1;
+    position: relative;
  }
  #overflow {
     width: 100%;
@@ -228,6 +230,7 @@ button:hover {
     align-items: center;
     height: 100%;
     color: #fff;
+    float: left;
  }
  #controls {
     margin: -190px 0 0 0;
@@ -246,6 +249,7 @@ button:hover {
  #controls label:hover {
     opacity: 1;
  }
+
  #slide1:checked ~ #controls label:nth-child(2),
  #slide2:checked ~ #controls label:nth-child(3),
  #slide3:checked ~ #controls label:nth-child(4),
@@ -265,8 +269,8 @@ button:hover {
     display: block;
  }
  #bullets {
-    margin: 110px 0 0;
     text-align: center;
+    margin: 110px 0 0;
  }
  #bullets label {
     display: inline-block;
@@ -324,6 +328,25 @@ button:hover {
     justify-content: space-around;
 }
 
+.forecastContainer{
+    display: flex;
+    background: #242424;
+    color: white;
+    padding: 2em;
+    border-radius: 30px;
+    width: 100%;
+    max-width: 600px;
+    margin: 1em;
+    height: 100%;
+    z-index: -1;
+}
+
+.titleForecast{
+    font-weight: 300;
+    text-transform: uppercase;
+    font-size: 1.3rem;
+}
+
 @media screen and (max-width: 750px) {
     #controls{
         display: none;
@@ -350,11 +373,21 @@ button:hover {
     }
 
     #bullets{
-        margin: -40px 0 0;
+        margin: -10px 0 0;
+    }
+
+    #bullets label{
+        width: 24px;
+        height: 24px;
     }
 
     #googleMap{
         width: 95%;
+    }
+
+    .forecastContainer{
+        width: 95%;
+        max-width: 100%;
     }
 }
 
@@ -362,7 +395,24 @@ button:hover {
     .flex{
         flex-direction: column
     }
+
     .temperatureObject > p{
         margin: 0.5em;
+    }   
+
+    #slider{
+        height: 60vh;
+    }
+
+    #slides{
+        height: 100%;
+    }
+
+    #overflow{
+        height: 100%;
+    }
+
+    #inner{
+        height: 100%;
     }
 }

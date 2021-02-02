@@ -15,7 +15,7 @@ let control;
 }
 
 function CallByCityID(cityID) {
-    API_Call("http://api.openweathermap.org/data/2.5/weather?id=" + cityID + "&units=" + unitType + "&appid=" + API_Key + "&lang=" + language);
+    API_Call("http://api.openweathermap.org/data/2.5/w`eather?id=" + cityID + "&units=" + unitType + "&appid=" + API_Key + "&lang=" + language);
 }
 
 function CallByCordinates(x, y) {
@@ -51,7 +51,7 @@ const WeatherAPI = {
 
 const ForecastAPI = {
     getSevenDaysForecast: function(x, y){
-        return $.ajax({type:"GET", url: "https://api.openweathermap.org/data/2.5/onecall?lat=" + x +"&lon=" + y + "&exclude=" + excludes + "&appid=" + API_Key});
+        return $.ajax({type:"GET", url: "https://api.openweathermap.org/data/2.5/onecall?lat=" + x + "&lon=" + y + "&units=" + unitType + "&exclude=" + excludes + "&appid=" + API_Key});
     }
 }
 

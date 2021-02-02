@@ -1,5 +1,5 @@
 let weatherObject;
-let forecastObject;
+let daysObject;
 const imageSource = "http://openweathermap.org/img/wn/{name}.png"
 let currentItem;
 let defaultCords = ["50.292961", "18.668930"];
@@ -107,7 +107,7 @@ function CompleteWeather() {
         }
     })(unitType);
 
-    document.getElementsByClassName("currentLocation flex flex-column")[0].style.display = "";
+    document.getElementsByClassName("currentLocation flex flex-column")[0].style.display = " ";
     document.getElementsByClassName("noLocation")[0].style.display = "none";
 
     var nameText = (weatherObject.name + ', ' + weatherObject.country).trim();
@@ -239,15 +239,16 @@ function ChooseItem(){
 }
 
 function WeatherForecast(x, y){
-    ForecastAPI.getSevenDaysForecast(x, y)
+    ForecastAPI.getSevenDaysForecast(y, x)
     .then(response =>{
         forecastObject = Forecast(response);
+        CompleteForecast();
     })
-    .fail(err => alert("blad"))
+    .fail(err => document.getElementById("slider").style.display = "none")
 }
 
 function Forecast(forecast){
-    let daysObject = [];
+    daysObject = [];
     for(let i = 0; i < 8; i++){
         daysObject.push(new Day(forecast.daily[i]));
     }
@@ -264,10 +265,17 @@ function Day(day){
     this.feelLike = day.feels_like.day;
     this.pressure = day.pressure;
     this.humidity = day.humidity;
-    this.windSpeed = day.windSpeed;
+    this.windSpeed = day.wind_speed;
     this.degrees = day.wind_deg;
     this.icon = day.weather[0].icon;
     this.description = day.weather[0].description;
+
+    //Rain
+    if (day.rain)
+        this.rain = day.rain;
+    //Snow
+    if (day.snow)
+        this.snow = day.snow;
 }
 
 function GetCityByCords(latitude, longitude){
@@ -289,5 +297,61 @@ function ChangeVisibility() {
 function GetLocation() {
     if (window.navigator.geolocation) {
         getCurrentLocation()
+    }
+}
+
+function CompleteForecast() {
+    if(document.getElementById("slider").style.display == "none"){
+        document.getElementById("slider").style.display = "";
+    }
+    const unit = ((value) => {
+        switch (value) {
+            case "standard": return "K";
+            case "metric": return "°C";
+            case "imperial": return "F";
+            default: return "OK";
+        }
+    })(unitType);
+
+    let forecastDays = document.getElementsByClassName("cityName");
+    let forecastImg = document.getElementsByClassName("weatherImg");
+    let forecastTemp = document.getElementsByClassName("cityInfo flex middle");
+    let forecastTempMinMax = document.getElementsByClassName("temperatureObject");
+    let forecastDetails = document.getElementsByClassName("cityDetail flex flex-column");
+    for(let i = 1; i < 5; i++){
+        forecastDays[i].innerHTML = daysObject[i].dt;
+        forecastImg[i].src = imageSource.replace("{name}", daysObject[i].icon);
+        forecastTemp[i].children[1].innerHTML = daysObject[i].dayTemp + unit;
+        forecastTempMinMax[i].children[0].innerHTML = daysObject[i].tempMin + unit;
+        forecastTempMinMax[i].children[1].innerHTML = daysObject[i].tempMax + unit;
+
+        if (daysObject[i].rain) {
+            forecastDetails[i].children[0].style.display = ""
+            forecastDetails[i].children[0].children[1].innerHTML = daysObject[i].rain + " mm/h";
+        }
+        else{
+            forecastDetails[i].children[0].style.display = "none"
+            forecastDetails[i].children[0].children[1].innerHTML = ""
+        }
+
+        if (daysObject[i].snow) {
+            forecastDetails[i].children[1].style.display = "";
+            forecastDetails[i].children[1].children[1].innerHTML = daysObject[i].snow + " mm/h";
+        }
+        else{
+            forecastDetails[i].children[1].style.display = "none";
+            forecastDetails[i].children[1].children[1].innerHTML = "";
+        }
+
+        const compass = ((value) => {
+            val = Math.round((value / 22.5) + .5, 1);
+            arr = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
+            return arr[(val % 16)]
+        })(daysObject[i].degrees);
+    
+        forecastDetails[i].children[2].children[1].innerHTML = daysObject[i].windSpeed + " m/s " + compass;
+        forecastDetails[i].children[3].innerHTML = "Odczuwalne: " + daysObject[i].feelLike + unit;
+        forecastDetails[i].children[4].innerHTML = "Wilgotność: " + daysObject[i].humidity + "%";
+        forecastDetails[i].children[5].innerHTML = "Ciśnienie: " + daysObject[i].pressure + "hPa"
     }
 }
