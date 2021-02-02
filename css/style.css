@@ -222,7 +222,7 @@ button:hover {
  #slides .inner {
     transition: margin-left 800ms cubic-bezier(0.770, 0.000, 0.175, 1.000);
     width: 400%;
-    height: 270px;
+    height: 40%;
  }
  #slides .slide {
     width: 25%;
@@ -345,6 +345,7 @@ button:hover {
     font-weight: 300;
     text-transform: uppercase;
     font-size: 1.3rem;
+    text-align: center;
 }
 
 @media screen and (max-width: 750px) {
@@ -414,5 +415,9 @@ button:hover {
 
     #inner{
         height: 100%;
+    }
+
+    #bullets{
+        margin: -30px 0 0;
     }
 }
