@@ -40,83 +40,129 @@
 </head>
 
     <body>
-        <nav class="topnav" id="nav">
-			<div id="navicon">&#9776;</div>
-			<div class="searchBar">
-				<input type="text" placeholder="Wyszukaj" />
-				<i class="fas fa-search searchBtn"></i>	
-			</div>
-		</nav>
-		<div id="overlay">
-			<h2>Ustawienia</h2>
-			<h4>Wybierz język</h4>
-			<h6>Kiedy wpisujesz nazwy miejscowości w wybranym języku</h6>
-			<select id="languagesContainer">
-				
-			</select>
-		</div>
-		<!-- content -->
-		<div class="page">
-			<div class="flex">
-				<div style="display:none" class="noLocation">
-					<a>
-						<p><i class="fas fa-map-marker-alt fa-lg"></i></p>
-						<span>Pobierz lokalizację</span>
-					</a>
+		<div class="card1">
+        	<nav class="topnav" id="nav">
+				<div class="searchBar">
+					<input type="text" placeholder="Wyszukaj" />
+					<button><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024" height="1.5em"
+						width="1.5em" xmlns="http://www.w3.org/2000/svg">
+						<path
+						  d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0 0 11.6 0l43.6-43.5a8.2 8.2 0 0 0 0-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z">
+						</path>
+					  </svg></button>
 				</div>
-				<div class="currentLocation flex flex-column">
-					<b class="cityName">Warszawa, PL</b>
-					<div class="flex flex-space-around middle" style="margin-top: 5px;">
-						<div class="flex flex-column">
-							<div class="cityInfo flex middle">
-								<img class="weatherImg" src="http://openweathermap.org/img/wn/10d@2x.png" />
-								<h1>21&#176;C</h1>
+			</nav>
+		</div>
+
+		<div class="card">
+			<div class="page">
+				<div class="flex">
+					<div style="display:none" class="noLocation">
+						<a>
+							<p><i class="fas fa-map-marker-alt fa-lg"></i></p>
+							<span>Pobierz lokalizację</span>
+						</a>
+					</div>
+					<div class="currentLocation flex flex-column">
+						<b class="cityName">Warszawa, PL</b>
+						<div class="flex flex-space-around middle" style="margin-top: 15px;">
+							<div class="flex flex-column">
+								<div class="cityInfo flex middle">
+									<img class="weatherImg" src="http://openweathermap.org/img/wn/10d@2x.png" />
+									<h1>21&#176;C</h1>
+								</div>
+								<div class="flex flex-space-around">
+									<p class="tempMin">21&#176;C</p><p class="tempMax">21&#176;C</p>
+								</div>
 							</div>
-							<div class="flex flex-space-around">
-								<p class="tempMin">21&#176;C</p><p class="tempMax">21&#176;C</p>
+							<div class="cityDetail flex flex-column">
+								<p style="display: none;"><i class="fas fa-cloud-rain"></i> <span>0.03mm/h</span></p>
+								<p style="display: none;"><i class="far fa-snowflake"></i> <span>0.03mm/h</span></p>
+								<p><i class="fas fa-wind"></i> <span>6m/s NW</span></p>
+								<p>Odczuwalne: 21&#176;C</p>
+								<p>Wilgotność: 100%</p>
+								<p>Ciśnienie: 1000hPa</p>
 							</div>
-						</div>
-						<div class="cityDetail flex flex-column">
-							<p style="display: none;"><i class="fas fa-cloud-rain"></i> <span>0.03mm/h</span></p>
-							<p style="display: none;"><i class="far fa-snowflake"></i> <span>0.03mm/h</span></p>
-							<p><i class="fas fa-wind"></i> <span>6m/s NW</span></p>
-							<p>Odczuwalne: 21&#176;C</p>
-							<p>Wilgotność: 100%</p>
-							<p>Ciśnienie: 1000hPa</p>
 						</div>
 					</div>
 				</div>
-				<!-- MAP -->
-				<div id="display-map" class="display-demo-map">
-					<!-- CSSMap - Poland -->
-					<div id="map-poland">
-						<ul class="poland">
-							<li class="pl1"><a href="#dolnoslaskie">Dolnośląskie</a></li>
-							<li class="pl2"><a href="#kujawsko-pomorskie">Kujawsko-pomorskie</a></li>
-							<li class="pl3"><a href="#lubelskie">Lubelskie</a></li>
-							<li class="pl4"><a href="#lubuskie">Lubuskie</a></li>
-							<li class="pl5"><a href="#lodzkie">Łódzkie</a></li>
-							<li class="pl6"><a href="#malopolskie">Małopolskie</a></li>
-							<li class="pl7"><a href="#mazowieckie">Mazowieckie</a></li>
-							<li class="pl8"><a href="#opolskie">Opolskie</a></li>
-							<li class="pl9"><a href="#podkarpackie">Podkarpackie</a></li>
-							<li class="pl10"><a href="#podlaskie">Podlaskie</a></li>
-							<li class="pl11"><a href="#pomorskie">Pomorskie</a></li>
-							<li class="pl12"><a href="#slaskie">Śląskie</a></li>
-							<li class="pl13"><a href="#swietokrzyskie">Świętokrzyskie</a></li>
-							<li class="pl14"><a href="#warminsko-mazurskie">Warmińsko-mazurskie</a></li>
-							<li class="pl15"><a href="#wielkopolskie">Wielkopolskie</a></li>
-							<li class="pl16"><a href="#zachodniopomorskie">Zachodniopomorskie</a></li>
-						</ul>
-					</div>
-					<!-- END OF THE CSSMap - Poland -->
-				</div>
-				>
-				<!-- END OF THE MAP -->
 			</div>
 		</div>
-		<div class="page">
-			page 2
-		</div>
+
+		<div id="slider">
+			<input type="radio" name="slider" id="slide1" checked>
+			<input type="radio" name="slider" id="slide2">
+			<input type="radio" name="slider" id="slide3">
+			<input type="radio" name="slider" id="slide4">
+			<div id="slides">
+				<div id="overflow">
+					<div class="inner">
+						<div class="slide slide_1">
+						<div class="slide-content">
+							<div class="card">
+								<div class="page">
+									<div class="flex">
+										<div style="display:none" class="noLocation">
+											<a>
+												<p><i class="fas fa-map-marker-alt fa-lg"></i></p>
+												<span>Pobierz lokalizację</span>
+											</a>
+										</div>
+										<div class="currentLocation flex flex-column">
+											<b class="cityName">Warszawa, PL</b>
+											<div class="flex flex-space-around middle" style="margin-top: 15px;">
+												<div class="flex flex-column">
+													<div class="cityInfo flex middle">
+														<img class="weatherImg" src="http://openweathermap.org/img/wn/10d@2x.png" />
+														<h1>21&#176;C</h1>
+													</div>
+													<div class="flex flex-space-around">
+														<p class="tempMin">21&#176;C</p><p class="tempMax">21&#176;C</p>
+													</div>
+												</div>
+												<div class="cityDetail flex flex-column">
+													<p style="display: none;"><i class="fas fa-cloud-rain"></i> <span>0.03mm/h</span></p>
+													<p style="display: none;"><i class="far fa-snowflake"></i> <span>0.03mm/h</span></p>
+													<p><i class="fas fa-wind"></i> <span>6m/s NW</span></p>
+													<p>Odczuwalne: 21&#176;C</p>
+													<p>Wilgotność: 100%</p>
+													<p>Ciśnienie: 1000hPa</p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						</div>
+						<div class="slide slide_2">
+						<div class="slide-content">
+						</div>
+						</div>
+						<div class="slide slide_3">
+						<div class="slide-content">
+						</div>
+						</div>
+						<div class="slide slide_4">
+						<div class="slide-content">
+						</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="controls">
+				<label for="slide1"></label>
+				<label for="slide2"></label>
+				<label for="slide3"></label>
+				<label for="slide4"></label>
+			</div>
+			<div id="bullets">
+				<label for="slide1"></label>
+				<label for="slide2"></label>
+				<label for="slide3"></label>
+				<label for="slide4"></label>
+			</div>
+			</div>
+
     </body>
 </html>
