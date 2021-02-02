@@ -5,7 +5,6 @@ let currentItem;
 let defaultCords = ["50.292961", "18.668930"];
 //Funcja do onClick
 function getCurrentLocation() {
-
     const successfulLookup = position => {
         const { latitude, longitude } = position.coords;
         fetch(`https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=5af07f4f6a8b4918a010d981b6175f78`)
@@ -25,15 +24,12 @@ function getCurrentLocation() {
 
     if (window.navigator.geolocation) {
         window.navigator.geolocation
-            .getCurrentPosition(successfulLookup, console.log);
+            .getCurrentPosition(successfulLookup, ChangeVisibility);
     }
-
 }
 
 if (window.navigator.geolocation) {
-
     getCurrentLocation()
-
 }
 
 window.onload = function () {
@@ -46,6 +42,7 @@ window.onload = function () {
     searchBarChildrens[0].addEventListener('input', AutoComplete, false);
     searchBarChildrens[0].addEventListener('focusin', AutoComplete, false);
     document.addEventListener('click', CloseList, false);
+    document.getElementsByClassName("noLocation")[0].addEventListener('click', GetLocation, false);
 }
 
 function CheckCityName() {
@@ -109,6 +106,9 @@ function CompleteWeather() {
             default: return "OK";
         }
     })(unitType);
+
+    document.getElementsByClassName("currentLocation flex flex-column")[0].style.display = "";
+    document.getElementsByClassName("noLocation")[0].style.display = "none";
 
     var nameText = (weatherObject.name + ', ' + weatherObject.country).trim();
     document.querySelector('.cityName').innerHTML = nameText.length == 1? " " : nameText;
@@ -276,4 +276,15 @@ function GetCityByCords(latitude, longitude){
             WeatherForecast(weatherObject.cordX, weatherObject.cordY);
         }
     )
+}
+
+function ChangeVisibility() {
+    document.getElementsByClassName("noLocation")[0].style.display = "block";
+    document.getElementsByClassName("currentLocation flex flex-column")[0].style.display = "none";
+}
+
+function GetLocation() {
+    if (window.navigator.geolocation) {
+        getCurrentLocation()
+    }
 }

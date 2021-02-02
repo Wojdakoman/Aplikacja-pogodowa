@@ -146,7 +146,7 @@ button:hover {
     max-height: 100px;
 }
 .cityName {
-    font-size: 20px;
+    font-size: 1.4rem;
     align-self: center;
 }
 .cityInfo h1 {
@@ -169,19 +169,18 @@ button:hover {
     justify-content: center;
 }
 .noLocation a {
-    border: 1px solid #006C20;
+    border: 1px solid white;
     border-radius: 3px;
     display: flex;
 }
 .noLocation p {
-    background-color: #00BD20;
     color: white;
     display: flex;
     align-items: center;
     padding: 0 10px;
 }
 .noLocation span {
-    color: #006C20;
+    color: white;
     padding: 10px 5px;
 }
 
@@ -291,6 +290,7 @@ button:hover {
     height: 30vh;
     border-radius: 30px;
     margin-top: 30px;
+    margin-bottom: 10px;
  }
 
  #centerButton{
@@ -304,9 +304,65 @@ button:hover {
     text-align: center;
     color: #191919;
     font-family: Roboto, Arial, sans-serif;
-    font-size: 15px;
+    font-size: 1rem;
     line-height: 25px;
     padding-left: 5px;
     padding-right: 5px;
     margin-left: 12px;
  }
+
+.flex.flex-column{
+    margin-right: 0.5em;
+}
+
+.noLocation:hover{
+    cursor: pointer;
+}
+
+.temperatureObject{
+    display: flex;
+    justify-content: space-around;
+}
+
+@media screen and (max-width: 750px) {
+    #controls{
+        display: none;
+    }
+    .card1{
+        width: 95%;
+        max-width: 100%;
+    }
+    .card2{
+        width: 95%;
+        max-width: 100%;
+        padding-left: 0.3em;
+        padding-right: 0.3em;
+    }
+
+    #slider{
+        width: 95%;
+        max-width: 100%;
+    }
+
+    #slides{
+        width: 95%;
+        max-width: 100%;
+    }
+
+    #bullets{
+        margin: -40px 0 0;
+    }
+
+    #googleMap{
+        width: 95%;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .flex{
+        flex-direction: column
+    }
+    .temperatureObject > p{
+        margin: 0.5em;
+    }
+}
