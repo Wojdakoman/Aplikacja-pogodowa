@@ -254,7 +254,10 @@ function Forecast(forecast){
 }
 
 function Day(day){
-    this.dt = day.dt;
+
+    let date = new Date(day.dt * 1000);
+    this.dt = date.toLocaleString().split(',')[0];
+
     this.dayTemp = day.temp.day;
     this.tempMin = day.temp.min;
     this.tempMax = day.temp.max;
