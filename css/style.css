@@ -249,6 +249,11 @@ button:hover {
     max-width: 650px;
     position: absolute;
     margin-left: -150px;
+    margin-top: 2px;
+}
+
+.swiper-wrapper{
+    margin-top: -10px;
 }
 
 .swiper-pagination{
