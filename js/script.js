@@ -126,10 +126,17 @@ function CompleteWeather() {
         elements[0].style.display = "";
         elements[0].children[1].innerHTML = weatherObject.rain + " mm/h";
     }
-
+    else{
+        elements[0].style.display = "none";
+        elements[0].children[1].innerHTML = "";
+    }
     if (weatherObject.snow) {
         elements[1].style.display = "";
         elements[1].children[1].innerHTML = weatherObject.snow + " mm/h";
+    }
+    else{
+        elements[1].style.display = "none";
+        elements[1].children[1].innerHTML = "";
     }
 
     const compass = ((value) => {

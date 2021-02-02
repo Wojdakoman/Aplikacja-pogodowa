@@ -7,6 +7,8 @@ let language = "en"
 let excludes = "current,minutely,hourly,alerts";
 //GoogleMaps API
 const mapsAPI = "XD";
+//Kontrolka
+let control;
 
 /*function CallByCityName(cityName) {
     API_Call("http://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&units=" + unitType + "&appid=" + API_Key + "&lang=" + language);
@@ -85,8 +87,16 @@ window.initMap = function(){
         let cordY = e.latLng.lng();
         GetCityByCords(cordX, cordY);
         AddMarker(cordX, cordY);
+        document.getElementsByClassName("searchBar")[0].children[0].value = "";
     })
     map.setOptions({ minZoom: 4, maxZoom: 12 });
+
+    const centerControlDiv = document.createElement("div");
+    control = new CenterControl(centerControlDiv, map, { lat: parseFloat(defaultCords[0]), lng: parseFloat(defaultCords[1])});
+    centerControlDiv.index = 1;
+    centerControlDiv.style.paddingTop = "10px";
+    map.controls[google.maps.ControlPosition.LEFT_TOP].push(centerControlDiv);
+    
 }
 document.head.appendChild(script);
 
@@ -112,9 +122,32 @@ function AddMarker(x, y){
     });
     map.panTo(pos);
     markerObject = marker;
+    control.ChangeCenter(pos);
 }
 
 function DeleteMarks(){
     if(markerObject)
         markerObject.setMap(null);
+}
+
+class CenterControl{
+    constructor(div, map, center){
+        this._map = map;
+        this._center = new google.maps.LatLng(center);
+        div.style.clear = "both";
+
+        const centerButton = document.createElement("dvi");
+        centerButton.id = "centerButton";
+        centerButton.title = "Powróc do zaznaczonego punktu";
+        centerButton.innerHTML = "WYCENTRUJ";
+        div.appendChild(centerButton);
+
+        centerButton.addEventListener("click", () => {
+            const currentCenter = this._center;
+            this._map.setCenter(currentCenter);
+        })
+    }
+    ChangeCenter(center) {
+        this._center = new google.maps.LatLng(center);
+    }
 }
