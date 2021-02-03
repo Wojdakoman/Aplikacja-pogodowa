@@ -9,10 +9,9 @@ body {
     justify-content: center;
     align-items: center;
     margin: 0;
-    height: 100vh;
+    min-height: 100vh;
     font-family: 'Open Sans', sans-serif;
     background: linear-gradient(-45deg, #43cea2  , #33485c);
-    background-repeat: no-repeat;
 }
 .card1 {
     background: #2b2a2a;
@@ -245,6 +244,7 @@ button:hover {
     font-family: "Lucida Console", monospace;
     font-size: 1.1rem;
     text-align: center;
+    margin-bottom: 2px;
     color: white;
     opacity: 0.9;
 }
@@ -301,13 +301,8 @@ button:hover {
         padding-left: 0.3em;
         padding-right: 0.3em;
     }
-
-    .slider-container{
-        max-width: 100%;
-    }
-
     body{
-        height: auto;
+        min-height: 100vh;
     }
 }
 
